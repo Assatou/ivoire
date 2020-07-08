@@ -23,6 +23,7 @@ include('../config.php');
 	  <link type="text/css" rel="stylesheet" href="styl.css">
 	  <link type="text/css" rel="stylesheet" href="insert/ionicons-2.0.1/css/ionicons.min.css">
 	  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="https://kit.fontawesome.com/7cb0e7c261.js" crossorigin="anonymous"></script>
 	</head>
 	<body style="background-color: #2a8950">
 		 <header>
@@ -41,7 +42,7 @@ include('../config.php');
                         </span>
                         <span class="path-divider">|</span>
                          <span class="link">
-                            <a href="supprimer_use"> suprimer un Utilisateurs</a>
+                            <a href="../supprimer_use.php"> suprimer un Utilisateurs</a>
                         </span>
                         
                     </div>
@@ -131,7 +132,7 @@ include('../config.php');
     
     <td><?php echo $row['date_enrg'] ?></td>
     <td>
-    <a href="modifier.php?id=<?php echo $row['id']?>" class="btn btn-success"> <i class="fas fa-edit"></i></a>
+    <a href="../modifier_traduct.php?id=<?php echo $row['id']?>" class="btn btn-success"> <i class="fas fa-edit"></i></a>
     <a href="supprime_traduc.php?id=<?php echo $row['id']?>" class="btn btn-primary"> <i class="far fa-trash-alt"></i></a>
     </td>
     </tr>

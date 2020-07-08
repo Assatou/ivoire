@@ -90,7 +90,7 @@
         $ip = $_SERVER['REMOTE_ADDR'];
 
         $date = date("Y-m-d h:i:s");
-        $sql = "INSERT INTO recherche (search_text, langue_start, langue_end, ip, date) VALUES ('$search_text','$langue_start','$langue_end', '$ip', '$date')";
+        $sql = "INSERT INTO recherche (search_text, langue_start, langue_end, ip, date_enrg) VALUES ('$search_text','$langue_start','$langue_end', '$ip', '$date')";
     
         if (mysqli_query($conn, $sql)) {
 
@@ -127,7 +127,7 @@
               <?php    
           }
     }else{
-      echo '';
+      echo 'bien vu';
     }
     
     

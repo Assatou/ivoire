@@ -1,85 +1,80 @@
+<?php
+session_start();
+?>
+
+<?php
+include("config.php");
+
+if (isset($_GET['id'])){
+
+$id = $_GET['id'];
+$query = "SELECT * FROM langue_start WHERE id = $id";
+$result = mysqli_query($con, $query);
+if (mysqli_num_rows($result) == 1) {
+	$row = mysqli_fetch_array($result);
+    $langue = $row['langue'];
+  $date = date("Y-m-d h:i:s");
+  
+  $id = $_GET['id'];
+$query = "SELECT * FROM langue_end WHERE id = $id";
+$result = mysqli_query($con, $query);
+if (mysqli_num_rows($result) == 1) {
+	$row = mysqli_fetch_array($result);
+    $langue = $row['langue'];
+	$date = date("Y-m-d h:i:s");
+}
+ 
+}
+
+if (isset($_POST['Modifier'])){
+    $id = $_GET['id'];
+    $langue = $_POST['langue'];
+	$date = date("Y-m-d h:i:s");
+
+	$query = "UPDATE langue_start SET langue = '$langue', date_enr = '$date' WHERE id = $id";
+	mysqli_query($conn, $query);
+  header("Location: home.php");
+  $query = "UPDATE langue_end SET langue = '$langue', date_enr = '$date' WHERE id = $id";
+	mysqli_query($conn, $query);
+	header("Location: ../home.php");
+
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
-<head>
-	<title>ivoire translator</title>
-	 <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-	  <link type="text/css" rel="stylesheet" href="styl.css">
-	  <link type="text/css" rel="stylesheet" href="insert/ionicons-2.0.1/css/ionicons.min.css">
-	  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-</head>
-<body>
-	 <header>
-            <div class="logo">
-               <img src="img/logo2.png" width="200" >
-            </div>
-            <div class="header-content">
-                <div class="breadcrumb">
-                    <div class="br-content">
-                        <span class="home">
-                            <a href="index.php">DASHBOARD</a>
-                        </span>
-                        <span class="path-divider">/</span>
-                        <span class="link">
-                            <a href="index.php">Utilisateurs</a>
-                        </span>
-                        
+    <head>
+        <title>Modifier une langue</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/7cb0e7c261.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container center-div">
+        
+            <div class="container row d-flex flex-row justify-content-center mb-8">
+                <div class="admin-form shadow p-5">
+
+                    <form id="myForm" action="editlang.php?id=<?php echo $_GET['id']; ?>" method="POST">
+
+                    <center><h3>Modifier une langue</h3></center><br>
+                    <div class="row">
+                        <div class="col form-group">
+                        <label class="font-weight-bold">Langue</label>
+                        <input type="text" value="<?php echo $langue; ?>" class="form-control" id="langue" placeholder="Modifier la langue" name="langue">
+                        </div>
                     </div>
-                </div>
+                    <input type="submit" name= "Modifier" class="btn bg-success text-dark" id="Modifier" value="Modifier">
+                    </form>
+
+                </div> 
             </div>
-        </header>
-        <center><h1 style="color: black; margin-top: 30px; font-size: 30px;" ><b>AJOUTER UNE TRADUCTION</b></h1></center>
-           <form>
-               <fieldset>
-                 
-                 
-                 <div class="form-group">
-                   <label for="nom">Entrez le mots</label>
-                   <input type="text" class="form-control" id="nom">
-                 </div>
-                 
-                 <div class="form-group">
-                   <label for="selection">choisir une langue</label>
-                   <select id="selection" class="form-control">
-                     	<option value="">Liste de choix</option>
-                       <option value="">anglais</option>
-                       <option value="">français</option>
-                    </select>
-                 </div>
-                  <div class="form-group">
-                   <label for="nom">donner la traduction</label>
-                   <input type="text" class="form-control" id="nom">
-                 </div>
-                 
-                 <div class="form-group">
-                   <label for="selection">Une liste de choix</label>
-                   <select id="selection" class="form-control">
-                     <option value="">Liste de choix</option>
-                       <option value="">Baoulé</option>
-                       <option value="">Agni</option>
-                       <option value="">Bété</option>
-                       <option value="">Dida</option>
-                       <option value="">Sénoufo</option>
-                       <option value="">Gouro</option>
-                       <option value="">Wobè</option>
-                       <option value="">Tagbanan</option>
-                       <option value="">Gagou</option>
-                   </select>
-                 </div>
-                 <div class="form-group">
-                   <label for="audio">ajouter l'audio</label>
-                   <input type="hidden" name="MAX_FILE_SIZE" value="2097152"> <input type="file" name="nom_du_fichier">
-                 </div>
-                 <input type="submit" name="submit" value="MODIFIER" class="box-button"  style="background-color: #2a8950" />
-               </fieldset>
-             </form>
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
-
-</body>
+        </div>
+    </body>
 </html>
