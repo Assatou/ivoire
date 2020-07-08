@@ -90,14 +90,15 @@
         $ip = $_SERVER['REMOTE_ADDR'];
 
         $date = date("Y-m-d h:i:s");
-        $sql = "INSERT INTO recherche (search_text, langue_start, langue_end, ip, date_enrg) VALUES ('$search_text','$langue_start','$langue_end', '$ip', '$date')";
+        // $sql = "INSERT INTO recherche (search_text, langue_start, langue_end, ip, date_enrg) 
+        // VALUES ('$search_text','$langue_start','$langue_end', '$ip', '$date')";
     
-        if (mysqli_query($conn, $sql)) {
+       
 
           $query = "SELECT * FROM data WHERE texte1 = '$search_text' AND langue_start = '$langue_start' AND langue_end = '$langue_end' ";
             $result = mysqli_query($conn, $query);
             
-
+            if (mysqli_query($conn, $sql)) {
 
             while($row = mysqli_fetch_array($result)) { ?>
 
