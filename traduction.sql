@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 07 juil. 2020 à 03:30
+-- Généré le : jeu. 09 juil. 2020 à 17:02
 -- Version du serveur :  10.4.13-MariaDB
 -- Version de PHP : 7.4.7
 
@@ -45,11 +45,21 @@ CREATE TABLE `data` (
   `texte1` varchar(255) NOT NULL,
   `langue_start` varchar(255) NOT NULL,
   `texte2` varchar(255) NOT NULL,
-  `langue_ end` varchar(255) NOT NULL,
-  `audio` text NOT NULL,
-  `status` varchar(70) NOT NULL,
+  `langue_end` varchar(255) NOT NULL,
+  `audio` text DEFAULT NULL,
   `date_enr` timestamp(6) NOT NULL DEFAULT current_timestamp(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `data`
+--
+
+INSERT INTO `data` (`id`, `texte1`, `langue_start`, `texte2`, `langue_end`, `audio`, `date_enr`) VALUES
+(1, 'bien dormi', 'français', 'belkèdjan', 'peulh', 'daudio/belkèdjan.m4a', '2020-07-08 09:25:29.000000'),
+(2, 'bonne journée', 'français', 'gnalèdjan', 'peulh', 'daudio/gnallèdjan.m4a', '2020-07-08 09:27:02.000000'),
+(3, 'ma maman', 'français', 'youma an', 'peulh', 'daudio/ma maman.m4a', '2020-07-08 09:28:57.000000'),
+(4, 'viens manger ', 'français', 'ar gnamen', 'peulh', 'daudio/viens manger.m4a', '2020-07-08 09:29:44.000000'),
+(5, 'bonjour', 'français', 'djarama', 'peulh', 'daudio/belkèdjan.m4a', '2020-07-09 03:59:35.000000');
 
 -- --------------------------------------------------------
 
@@ -60,7 +70,7 @@ CREATE TABLE `data` (
 CREATE TABLE `langue_end` (
   `id` int(11) NOT NULL,
   `langue` varchar(255) NOT NULL,
-  `date_enrg` date NOT NULL
+  `date_enrg` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -68,30 +78,11 @@ CREATE TABLE `langue_end` (
 --
 
 INSERT INTO `langue_end` (`id`, `langue`, `date_enrg`) VALUES
-(1, 'langue', '0000-00-00'),
-(2, 'langue', '0000-00-00'),
-(3, 'langue', '0000-00-00'),
-(4, 'langue', '0000-00-00'),
-(5, 'langue', '0000-00-00'),
-(6, 'langue', '0000-00-00'),
-(7, 'langue', '0000-00-00'),
-(8, 'langue', '0000-00-00'),
-(9, 'langue', '0000-00-00'),
-(10, 'langue', '0000-00-00'),
-(11, 'langue', '0000-00-00'),
-(12, 'langue', '0000-00-00'),
-(13, 'langue', '0000-00-00'),
-(14, 'langue', '0000-00-00'),
-(15, 'langue', '0000-00-00'),
-(16, 'langue', '0000-00-00'),
-(17, 'langue', '0000-00-00'),
-(18, 'langue', '0000-00-00'),
-(19, 'langue', '0000-00-00'),
-(20, 'langue', '0000-00-00'),
-(21, 'langue', '0000-00-00'),
-(22, 'langue', '0000-00-00'),
-(23, 'langue', '0000-00-00'),
-(24, 'langue', '0000-00-00');
+(1, 'peulh', '2020-07-08 00:00:00'),
+(2, 'dioula', '2020-07-08 00:00:00'),
+(3, 'baoule', '2020-07-08 00:00:00'),
+(4, 'bété', '2020-07-08 00:00:00'),
+(5, 'dida', '2020-07-08 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -102,7 +93,7 @@ INSERT INTO `langue_end` (`id`, `langue`, `date_enrg`) VALUES
 CREATE TABLE `langue_start` (
   `id` int(11) NOT NULL,
   `langue` varchar(255) NOT NULL,
-  `date_enrg` date NOT NULL
+  `date_enrg` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -110,9 +101,8 @@ CREATE TABLE `langue_start` (
 --
 
 INSERT INTO `langue_start` (`id`, `langue`, `date_enrg`) VALUES
-(1, 'langue', '0000-00-00'),
-(2, 'langue', '0000-00-00'),
-(3, 'langue', '0000-00-00');
+(1, 'anglais', '2020-07-08 16:22:34'),
+(2, 'français', '2020-07-08 16:22:43');
 
 -- --------------------------------------------------------
 
@@ -149,7 +139,16 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `username`, `type`, `email`, `password`) VALUES
-(1, 'Assatou sow', 'admin', 'assatousow5@gmail.com', '65aaaa197cf24fcb6ceb7b5a4120b14dac181930f002262e93db39c162906d0e');
+(1, 'Assatou sow', 'admin', 'assatousow5@gmail.com', '65aaaa197cf24fcb6ceb7b5a4120b14dac181930f002262e93db39c162906d0e'),
+(2, 'Assatou ', 'superviseur', 'assatousow5@gmail.com', 'f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9'),
+(3, 'Assatou', 'operateur', 'assatou.sow@uvci.edu.ci', 'f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9'),
+(4, 'oury', 'operateur', 'assatousow5@gmail.com', 'f2d81a260dea8a100dd517984e53c56a7523d96942a834b9cdc249bd4e8c7aa9'),
+(5, 'kouassi delima', 'operateur', 'ubuntuser92@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(6, 'kouassi delima', 'operateur', 'ubuntuser92@gmail.com', 'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646'),
+(7, 'Assatou sow', 'utilisateur', 'assatousow5@gmail.com', '192486023e53830e91f75d7f9f11c57d54869a9ff482aa68dca66c8cd95f3d4f'),
+(8, 'Assatou sow', 'operateur', 'assatousow5@gmail.com', '8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414'),
+(9, 'Assatou', 'operateur', 'assatou.sow@uvci.edu.ci', '65aaaa197cf24fcb6ceb7b5a4120b14dac181930f002262e93db39c162906d0e'),
+(10, 'kouassi delima', 'operateur', 'assatou.sow@uvci.edu.ci', 'c566b39b1042ff412be9880a42c316b0a4c0280e4d5296ed7b75fe13d41ef016');
 
 --
 -- Index pour les tables déchargées
@@ -205,19 +204,19 @@ ALTER TABLE `activite`
 -- AUTO_INCREMENT pour la table `data`
 --
 ALTER TABLE `data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `langue_end`
 --
 ALTER TABLE `langue_end`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `langue_start`
 --
 ALTER TABLE `langue_start`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `recherche`
@@ -229,7 +228,7 @@ ALTER TABLE `recherche`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -98,7 +98,7 @@
           $query = "SELECT * FROM data WHERE texte1 = '$search_text' AND langue_start = '$langue_start' AND langue_end = '$langue_end' ";
             $result = mysqli_query($conn, $query);
             
-            if (mysqli_query($conn, $sql)) {
+              if($result->num_rows > 0) {
 
             while($row = mysqli_fetch_array($result)) { ?>
 
@@ -123,11 +123,14 @@
               </div>
               </div>
               </div>
-              <?php } ?>
+              <?php } }else{
+                echo "<p class='text-sm'><a href='ajouter_traduc.php'>Soumettre une traduction ?</a></p>";
+              }
+               ?>
 
               <?php    
           }
-    }else{
+    else{
       echo 'bien vu';
     }
     
